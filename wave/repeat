@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฝึก</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function wave() {
+        let group = []
+        do {
+            word = prompt('value : ')
+            group = []
+            if(word.length >= 10) {
+                for(var x in word) {
+                    let newWord = ''    
+                    if(word[x] == ' ') {
+                        alert('ต้องไม่มีช่องว่างในคำ')
+                        word = ''
+                        break
+                    }
+                    for(var up in word){
+                        if(up == x) newWord += word[x].toUpperCase()
+                        else newWord += word[up]
+                    }
+                    group.push(newWord)
+                }
+            } else {
+                alert('โปรดกรอกข้อมูลที่มากกว่า 10 ตัวอักษร')
+            }
+        } while (word.length < 10)
+        console.log(group)
+        alert(JSON.stringify(group))
+    }
+    function repeat() {
+        let groupRepeat = []
+        let groupWordOld = new Map()       
+        word = prompt('value repeat : ')
+        for(var loop of word){
+            if(groupWordOld.has(loop)){
+                let num = groupWordOld.get(loop) + 1
+                groupWordOld.set(loop , num)
+            } else {
+                groupWordOld.set(loop , 0)
+            }
+        }
+        groupWordOld.forEach((value , key) => {
+            if(groupRepeat.indexOf(value) > 0) {
+                let index = groupRepeat.indexOf(value) - 1
+                groupRepeat[index] = groupRepeat[index] + key
+            } else {
+                groupRepeat.push(key)
+                groupRepeat.push(value)
+            }
+            if(groupRepeat[0] == null) {
+                groupRepeat.push(key)
+                groupRepeat.push(value)
+            }
+        })
+        alert(word + ' => ' + JSON.stringify(groupRepeat))
+        console.log(word + ' => ' + JSON.stringify(groupRepeat))
+    }
+    //wave()
+    repeat()
+</script>
+</html>
